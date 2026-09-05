@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Munix</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: #ffffff;
+
+            background:
+                radial-gradient(
+                    circle at 90% 0%,
+                    rgba(130, 30, 190, 0.20),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 10% 70%,
+                    rgba(90, 20, 150, 0.15),
+                    transparent 35%
+                ),
+                #08070d;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           GRID BACKGROUND
+        ========================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            z-index: -1;
+
+            background-image:
+                linear-gradient(
+                    rgba(170, 70, 230, 0.08) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(170, 70, 230, 0.08) 1px,
+                    transparent 1px
+                );
+
+            background-size: 48px 48px;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+
+            width: 92%;
+
+            max-width: 900px;
+
+            margin: auto;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+
+            text-align: center;
+
+            padding-top: 55px;
+            padding-bottom: 35px;
+        }
+
+
+        .home-button {
+
+            display: inline-block;
+
+            padding: 10px 20px;
+
+            border: 1px solid #8d32bd;
+
+            border-radius: 30px;
+
+            color: #c46cff;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            box-shadow:
+                0 0 15px
+                rgba(190, 70, 255, 0.08);
+        }
+
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        h1 {
+
+            margin-top: 28px;
+
+            font-size:
+                clamp(
+                    52px,
+                    11vw,
+                    76px
+                );
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff 35%,
+                    #bd5cff
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .subtitle {
+
+            margin-top: 15px;
+
+            color: #8e8995;
+
+            font-size: 20px;
+
+            line-height: 1.4;
+        }
+
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .cards {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 24px;
+
+            padding-top: 20px;
+
+            padding-bottom: 70px;
+        }
+
+
+        .card {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 24px;
+
+            min-height: 155px;
+
+            padding: 28px;
+
+            background:
+                rgba(17, 16, 22, 0.94);
+
+            border:
+                1px solid #642394;
+
+            border-radius: 30px;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        /* Hover */
+
+        .card:hover {
+
+            transform: translateY(-3px);
+
+            border-color: #c367ff;
+
+            box-shadow:
+                0 0 30px
+                rgba(180, 70, 255, 0.17);
+        }
+
+
+        /* APK highlighted card */
+
+        .card.highlight {
+
+            border-color: #c66cff;
+
+            box-shadow:
+                0 0 24px
+                rgba(190, 80, 255, 0.12);
+        }
+
+
+        .card.highlight:hover {
+
+            box-shadow:
+                0 0 35px
+                rgba(190, 80, 255, 0.25);
+        }
+
+
+        /* =========================
+           ICON
+        ========================= */
+
+        .icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            min-width: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border:
+                1px solid #8c3ac5;
+
+            border-radius: 20px;
+
+            color: #c269ff;
+
+            font-size: 34px;
+
+            font-weight: 400;
+
+            box-shadow:
+                inset 0 0 15px
+                rgba(180, 60, 255, 0.04);
+        }
+
+
+        /* =========================
+           CARD TEXT
+        ========================= */
+
+        .card h2 {
+
+            font-size: 27px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+
+        .card p {
+
+            color: #8f8995;
+
+            font-size: 18px;
+
+            line-height: 1.4;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            color: #77717d;
+
+            font-size: 16px;
+
+            padding-bottom: 35px;
+        }
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .container {
+
+                width: 92%;
+            }
+
+            header {
+
+                padding-top: 54px;
+            }
+
+            .card {
+
+                padding: 27px;
+
+                gap: 22px;
+            }
+
+            .card h2 {
+
+                font-size: 25px;
+            }
+
+            .card p {
+
+                font-size: 18px;
+            }
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 480px) {
+
+            .container {
+
+                width: 92%;
+            }
+
+
+            header {
+
+                padding-top: 52px;
+
+                padding-bottom: 30px;
+            }
+
+
+            .home-button {
+
+                font-size: 16px;
+
+                padding:
+                    9px 18px;
+            }
+
+
+            h1 {
+
+                margin-top: 27px;
+
+                font-size: 55px;
+            }
+
+
+            .subtitle {
+
+                font-size: 18px;
+
+                padding:
+                    0 10px;
+            }
+
+
+            .cards {
+
+                gap: 23px;
+
+                padding-top: 20px;
+            }
+
+
+            .card {
+
+                min-height: 155px;
+
+                padding: 25px;
+
+                gap: 20px;
+
+                border-radius: 28px;
+            }
+
+
+            .icon {
+
+                width: 68px;
+
+                height: 68px;
+
+                min-width: 68px;
+
+                border-radius: 19px;
+
+                font-size: 32px;
+            }
+
+
+            .card h2 {
+
+                font-size: 23px;
+
+                line-height: 1.2;
+            }
+
+
+            .card p {
+
+                font-size: 17px;
+
+                line-height: 1.4;
+            }
+
+
+            footer {
+
+                padding-top: 5px;
+
+                padding-bottom: 30px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <!-- =========================
+             HEADER
+        ========================= -->
+
+        <header>
+
+            <div class="home-button">
+                HOME PAGE
+            </div>
+
+            <h1>
+                Munix
+            </h1>
+
+            <p class="subtitle">
+                Everything about Munix in one place
+            </p>
+
+        </header>
+
+
+
+        <!-- =========================
+             MENU CARDS
+        ========================= -->
+
+        <section class="cards">
+
+
+            <!-- ABOUT MUNIX -->
+
+            <a
+                href="/mun1xx"
+                class="card"
+            >
+
+                <div class="icon">
+                    ⓘ
+                </div>
+
+                <div>
+
+                    <h2>
+                        About Munix
+                    </h2>
+
+                    <p>
+                        Learn what Munix is and the story behind it.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- SERVER -->
+
+            <a
+                href="/server"
+                class="card"
+            >
+
+                <div class="icon">
+                    ▤
+                </div>
+
+                <div>
+
+                    <h2>
+                        About Munix Server
+                    </h2>
+
+                    <p>
+                        Details on the server, how it runs, and how to join.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- APK DOWNLOAD -->
+
+            <a
+                href="/Apks"
+                class="card highlight"
+            >
+
+                <div class="icon">
+                    ↓
+                </div>
+
+                <div>
+
+                    <h2>
+                        Download Game APKs
+                    </h2>
+
+                    <p>
+                        Grab the latest and older verified APK builds.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- SOCIAL MEDIA -->
+
+            <a
+                href="/Socialmedia"
+                class="card"
+            >
+
+                <div class="icon">
+                    ⤴
+                </div>
+
+                <div>
+
+                    <h2>
+                        Social Media
+                    </h2>
+
+                    <p>
+                        Follow along and connect with the community.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             FOOTER
+        ========================= -->
+
+        <footer>
+
+            © 2026 Munix
+
+        </footer>
+
+
+    </div>
+
+
+</body>
+</html>
